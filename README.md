@@ -1,9 +1,10 @@
 # FoxitPDFSDK for Web Example - Vue3
 
-These guides are divided into two parts:
+These guides have the following sections:
 
 - [Part 1: How to run this example](#part-1-how-to-run-this-example)
 - [Part 2: How to use FoxitPDFSDK for Web in Vue3](#part-2-how-to-use-foxitpdfsdk-for-web-in-vue3)
+- [Part 3: Q & A](#part-3-q--a)
 
 ## Prerequisites
 
@@ -172,3 +173,9 @@ Navigate to `vue3-websdk/public/FoxitPDFSDKForWeb/server/snapshot`, and execute:
 npm install
 npm run start
 ```
+
+## Part 3: Q & A
+
+### 1. After autoprefixer is used, a large number of logs are generated on the console. How can I solve this problem?
+
+Remove the `import '@foxitsoftware/foxit-pdf-sdk-for-web-library/lib/UIExtension.css';` from `App.vue`，Add `<link rel="stylesheet" href="/FoxitPDFSDKForWeb/lib/UIExtension.css">` to `index.html`.
