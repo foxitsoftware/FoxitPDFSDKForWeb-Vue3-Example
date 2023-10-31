@@ -46,7 +46,7 @@
       <i class="fv__icon-logo"></i>
     </div>
   </div>
-  <div id="pdf-ui" ></div>
+  <div id="pdf-ui"></div>
 </template>
 
 <style scoped>
