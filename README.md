@@ -80,6 +80,11 @@ onMounted(() => {
       libPath: '/FoxitPDFSDKForWeb/lib',
       jr: {
         readyWorker: readyWorker
+      },
+      messageSyncServiceWorker: {
+          options:{
+              scope: '/FoxitPDFSDKForWeb/lib/'
+          }
       }
     },
     renderTo: '#pdf-ui',

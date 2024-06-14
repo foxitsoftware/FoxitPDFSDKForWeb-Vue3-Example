@@ -22,6 +22,11 @@
         libPath: '/FoxitPDFSDKForWeb/lib',
         jr: {
           readyWorker: readyWorker
+        },
+        messageSyncServiceWorker: {
+            options:{
+                scope: '/FoxitPDFSDKForWeb/lib/'
+            }
         }
       },
       renderTo: '#pdf-ui',
@@ -41,12 +46,14 @@
 </script>
 
 <template>
-  <div class="fv__ui-nav">
-    <div class="fv__ui-nav-logo">
-      <i class="fv__icon-logo"></i>
+  <div>
+    <div class="fv__ui-nav">
+      <div class="fv__ui-nav-logo">
+        <i class="fv__icon-logo"></i>
+      </div>
     </div>
+    <div id="pdf-ui"></div>
   </div>
-  <div id="pdf-ui"></div>
 </template>
 
 <style scoped>
