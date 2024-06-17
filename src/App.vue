@@ -32,6 +32,10 @@
           '/FoxitPDFSDKForWeb/lib/uix-addons/allInOne.js'
     });
 
+    window.addEventListener('resize', () => {
+      pdfui.redraw();
+    });
+
     pdfui.openPDFByHttpRangeRequest({
       range: {
         url: '/FoxitPDFSDKforWeb_DemoGuide.pdf',
