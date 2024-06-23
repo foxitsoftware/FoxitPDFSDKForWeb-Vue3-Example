@@ -13,31 +13,78 @@ These guides have the following sections:
 
 ## Part 1: How to run this example
 
-### 1. Clone the repository:
+### 1. Clone the repository
+
 ```shell
 git clone git@github.com:foxitsoftware/FoxitPDFSDKForWeb-Vue3-Example.git vue3-websdk
 ```
-### 2. Enter the directory and run npm install:
+
+### 2. Enter the directory and run npm install
+
 ```shell
 cd vue3-websdk
 npm install
 ```
-### 3. Update the licenseSN and licenseKey values in `vue3-websdk/src/App.vue` with your own licenseSN and licenseKey that you received from sales.
-### 4. Run project.
+
+### 3. Update the licenseSN and licenseKey values in `vue3-websdk/src/App.vue` with your own licenseSN and licenseKey that you received from sales
+
+### 4. Run project
+
 ```shell
 npm run dev
 ```
-### 5. Start snapshot serve.
+
+### 5. Start snapshot serve
+
 Navigate to `vue3-websdk/public/FoxitPDFSDKForWeb/server/snapshot`, and execute:
+
 ```shell
 npm install
 npm run start
 ```
 
+### 6. Reference the `Service-Worker-Allowed` HTTP header
+
+Starting from FoxitPDFSDK for Web version `10.0.0`, since service worker is used, it is necessary to add this field in the HTTP response header of the Service Worker script. Its value is the maximum allowed scope path:
+
+```http
+Service-Worker-Allowed /;
+```
+
+#### Nginx 配置示例
+
+If you are using Nginx as your server, you can add the `Service-Worker-Allowed` response header by modifying the Nginx configuration file. Below is an example configuration：
+
+```nginx
+server {
+    location /sw.js {
+        add_header Service-Worker-Allowed /;
+    }
+}
+```
+
+#### Webpack Dev Server 配置示例
+
+If you use Webpack Dev Server for local development, you can add `Service-Worker-Allowed` response headers by configuring devServer. The following is a configuration example：
+
+```js
+// webpack.config.js
+module.exports = {
+    // 其他配置
+    devServer: {
+        headers: {
+            'Service-Worker-Allowed': '/'
+        }
+    }
+};
+```
+
 ## Part 2: How to use FoxitPDFSDK for Web in Vue3
 
-### 1. Create project.
+### 1. Create project
+
 Execute the command `npm init vue@latest` and follow the wizard to complete the setup:
+
 - Project name: -> vue3-websdk
 - Add TypeScript? -> No
 - Add JSX Support? -> No
@@ -47,14 +94,18 @@ Execute the command `npm init vue@latest` and follow the wizard to complete the 
 - Add Cypress for both Unit and End-to-End testing? -> No
 - Add ESLint for code quality? -> No
 - Add Prettier for code formatting? -> No
-### 2. Install dependence.
+
+### 2. Install dependence
+
 ```shell
 cd vue3-websdk
 npm install
 npm install @foxitsoftware/foxit-pdf-sdk-for-web-library
 npm install -D rollup-plugin-copy
 ```
-### 3. Update `vue3-websdk/src/App.vue` to follow.
+
+### 3. Update `vue3-websdk/src/App.vue` to follow
+
 ```vue
 <script setup>
 import '@foxitsoftware/foxit-pdf-sdk-for-web-library/lib/UIExtension.css';
@@ -80,11 +131,6 @@ onMounted(() => {
       libPath: '/FoxitPDFSDKForWeb/lib',
       jr: {
         readyWorker: readyWorker
-      },
-      messageSyncServiceWorker: {
-          options:{
-              scope: '/FoxitPDFSDKForWeb/lib/'
-          }
       }
     },
     renderTo: '#pdf-ui',
@@ -116,8 +162,11 @@ onMounted(() => {
 </style>
 
 ```
-### 4. Update the licenseSN and licenseKey values in `vue3-websdk/src/App.vue` with your own licenseSN and licenseKey that you received from sales.
-### 5. Update `vue3-websdk/vite.config.js` to follow.
+
+### 4. Update the licenseSN and licenseKey values in `vue3-websdk/src/App.vue` with your own licenseSN and licenseKey that you received from sales
+
+### 5. Update `vue3-websdk/vite.config.js` to follow
+
 ```js
 import { fileURLToPath, URL } from 'node:url'
 
@@ -154,11 +203,16 @@ export default defineConfig({
   server: {
     proxy: {
       '/snapshot': 'http://localhost:3002',
+    },
+    headers: {
+      'Service-Worker-Allowed': '/'
     }
   }
 })
 ```
+
 ### 6. Update `vue3-websdk/src/main.js` to remove Vue3 default style:
+
 ```diff
 - import './assets/main.css'
 + // import './assets/main.css'
@@ -168,12 +222,17 @@ import App from './App.vue'
 
 createApp(App).mount('#app')
 ```
-### 7. Run project.
+
+### 7. Run project
+
 ```shell
 npm run dev
 ```
-### 8. Start snapshot serve.
+
+### 8. Start snapshot serve
+
 Navigate to `vue3-websdk/public/FoxitPDFSDKForWeb/server/snapshot`, and execute:
+
 ```shell
 npm install
 npm run start

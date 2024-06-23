@@ -33,6 +33,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/snapshot': 'http://localhost:3002',
+    },
+    headers: {
+      'Service-Worker-Allowed': '/'
     }
   }
 })
