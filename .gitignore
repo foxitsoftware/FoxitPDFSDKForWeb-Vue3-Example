@@ -22,6 +22,5 @@ yarn-error.log*
 
 # websdk files
 public/FoxitPDFSDKForWeb
-license-key.js
 
 package-lock.json
