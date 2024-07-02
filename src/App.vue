@@ -2,7 +2,7 @@
   import '@foxitsoftware/foxit-pdf-sdk-for-web-library/lib/UIExtension.css';
   import * as UIExtension from '@foxitsoftware/foxit-pdf-sdk-for-web-library/lib/UIExtension.full.js';
   import preloadJrWorker from '@foxitsoftware/foxit-pdf-sdk-for-web-library/lib/preload-jr-worker.js';
-  import {onMounted} from 'vue';
+  import { onMounted } from 'vue';
   
   onMounted(() => {
     const licenseSN = 'xxx';
@@ -30,6 +30,10 @@
       addons: UIExtension.PDFViewCtrl.DeviceInfo.isMobile ?
           '/FoxitPDFSDKForWeb/lib/uix-addons/allInOne.mobile.js':
           '/FoxitPDFSDKForWeb/lib/uix-addons/allInOne.js'
+    });
+
+    window.addEventListener('resize', () => {
+      pdfui.redraw();
     });
 
     pdfui.openPDFByHttpRangeRequest({
