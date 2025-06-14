@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "postinstall": "npm install --ignore-scripts -S @foxitsoftware/foxit-pdf-sdk-for-web-library",
-    "dev": "vite",
+    "dev": "vite --force",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@foxitsoftware/foxit-pdf-sdk-for-web-library": "^10.0.5",
     "vue": "^3.2.47"
   },
   "devDependencies": {
