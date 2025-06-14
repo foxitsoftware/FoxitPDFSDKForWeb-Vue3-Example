@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@foxitsoftware/foxit-pdf-sdk-for-web-library": "^10.0.5",
     "vue": "^3.2.47"
   },
   "devDependencies": {
