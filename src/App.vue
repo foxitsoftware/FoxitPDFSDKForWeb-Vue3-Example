@@ -2,7 +2,7 @@
   import '@foxitsoftware/foxit-pdf-sdk-for-web-library/lib/UIExtension.css';
   import * as UIExtension from '@foxitsoftware/foxit-pdf-sdk-for-web-library/lib/UIExtension.full.js';
   import preloadJrWorker from '@foxitsoftware/foxit-pdf-sdk-for-web-library/lib/preload-jr-worker.js';
-  import { onMounted } from 'vue';
+  import { onMounted, onBeforeUnmount } from 'vue';
   
   onMounted(() => {
     const licenseSN = 'xxx';
@@ -31,6 +31,7 @@
           '/FoxitPDFSDKForWeb/lib/uix-addons/allInOne.mobile.js':
           '/FoxitPDFSDKForWeb/lib/uix-addons/allInOne.js'
     });
+    window.pdfui = pdfui;
 
     window.addEventListener('resize', () => {
       pdfui.redraw();
@@ -41,6 +42,11 @@
         url: '/FoxitPDFSDKforWeb_DemoGuide.pdf',
       }
     }, {fileName: 'FoxitPDFSDKforWeb_DemoGuide.pdf'});
+  });
+
+  onBeforeUnmount(() => {
+    window.pdfui.destroy();
+    window.pdfui = null;
   });
 </script>
 
